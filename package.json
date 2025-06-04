@@ -1,0 +1,75 @@
+{
+  "name": "backend-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "nodemon --exec ts-node src/server.ts",
+    "dev:app": "nodemon --exec ts-node src/app.ts",
+    "build": "npx tsc",
+    "build:watch": "npx tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "jest --forceExit",
+    "test:watch": "jest --watch",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "seed": "ts-node scripts/seed-database.ts"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/setup.ts"
+    ],
+    "testMatch": [
+      "**/tests/**/*.test.ts"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "axios": "^1.9.0",
+    "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.6.1",
+    "compression": "^1.8.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.1",
+    "express-rate-limit": "^7.5.0",
+    "express-validator": "^7.2.1",
+    "firebase-admin": "^13.4.0",
+    "form-data": "^4.0.2",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.16.0",
+    "mongodb-memory-server": "^10.1.4",
+    "mongoose": "^8.15.1",
+    "morgan": "^1.10.0",
+    "multer": "^2.0.0",
+    "rimraf": "^6.0.1",
+    "socket.io": "^4.8.1",
+    "streamifier": "^0.1.1",
+    "supertest": "^7.1.1"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/compression": "^1.8.0",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.2",
+    "@types/express-validator": "^2.20.33",
+    "@types/helmet": "^0.0.48",
+    "@types/jest": "^29.5.14",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/morgan": "^1.9.9",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^20.17.52",
+    "@types/supertest": "^6.0.3",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}

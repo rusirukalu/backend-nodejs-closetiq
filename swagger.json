@@ -1,0 +1,186 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Fashion AI System API",
+      "description": "API documentation for the Fashion AI System Node.js Backend",
+      "version": "1.0.0",
+      "contact": {
+        "name": "Fashion AI Support",
+        "email": "support@fashion-ai.com"
+      }
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8000",
+        "description": "Development server"
+      },
+      {
+        "url": "https://api.fashion-ai.com",
+        "description": "Production server"
+      }
+    ],
+    "components": {
+      "securitySchemes": {
+        "BearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      },
+      "schemas": {
+        "User": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": "60d0fe4f5311236168a109ca"
+            },
+            "email": {
+              "type": "string",
+              "example": "user@example.com"
+            },
+            "username": {
+              "type": "string",
+              "example": "fashionista"
+            },
+            "profile": {
+              "type": "object",
+              "properties": {
+                "age": {
+                  "type": "number",
+                  "example": 28
+                },
+                "gender": {
+                  "type": "string",
+                  "example": "female"
+                },
+                "stylePreferences": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": ["casual", "minimalist"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "paths": {
+      "/api/health": {
+        "get": {
+          "summary": "Health check endpoint",
+          "description": "Returns API health status",
+          "responses": {
+            "200": {
+              "description": "API is running",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Fashion AI Backend is running"
+                      },
+                      "timestamp": {
+                        "type": "string",
+                        "example": "2025-05-29T13:15:30Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/auth/register": {
+        "post": {
+          "summary": "Register a new user",
+          "description": "Creates a new user account",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["email", "username", "firebaseUid"],
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "user@example.com"
+                    },
+                    "username": {
+                      "type": "string",
+                      "example": "fashionista"
+                    },
+                    "firebaseUid": {
+                      "type": "string",
+                      "example": "5kcDnRTyjLVxhwYdZpRUlBv0A2x1"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "User created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "User created successfully"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "user": {
+                            "$ref": "#/components/schemas/User"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input or user already exists",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "User already exists"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
